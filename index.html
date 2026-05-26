@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mezzo Yeonhui · 메조연희</title>
+<meta name="description" content="연희동, 한 음악인의 살롱. 살롱 콘서트, 프라이빗 디너, 팝업, 촬영을 위한 큐레이션된 공간.">
+<meta property="og:title" content="Mezzo Yeonhui · 메조연희">
+<meta property="og:description" content="연희동, 한 음악인의 살롱.">
+<meta property="og:image" content="./images/01-salon-piano.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+:root {
+  /* Palette — drawn from the wallpaper, chandeliers, and stone */
+  --bg-cream: #F4EFE8;
+  --bg-paper: #EFE8DE;
+  --ink-deep: #1F1A16;
+  --ink-mauve: #4A3E3A;
+  --ink-muted: #7A6B5F;
+  --accent-bronze: #8B6F47;
+  --accent-bronze-light: #B89469;
+  --mauve-soft: #B8A8A0;
+  --divider: rgba(31, 26, 22, 0.12);
+  --shadow-soft: 0 30px 80px -40px rgba(31, 26, 22, 0.25);
+  
+  --serif-en: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --serif-kr: 'Noto Serif KR', 'Cormorant Garamond', serif;
+  --sans-kr: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans-kr);
+  background: var(--bg-cream);
+  color: var(--ink-deep);
+  line-height: 1.7;
+  font-weight: 350;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+/* ===== Navigation ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: transparent;
+  transition: all 0.4s ease;
+  mix-blend-mode: difference;
+}
+.nav.scrolled {
+  background: rgba(244, 239, 232, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 18px 48px;
+  mix-blend-mode: normal;
+  border-bottom: 1px solid var(--divider);
+}
+.nav-mark {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.nav.scrolled .nav-mark { color: var(--ink-deep); }
+.nav-mark .ko {
+  font-family: var(--serif-kr);
+  font-style: normal;
+  font-size: 14px;
+  margin-left: 10px;
+  opacity: 0.75;
+  letter-spacing: 0.15em;
+}
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-family: var(--sans-kr);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: opacity 0.3s;
+}
+.nav.scrolled .nav-links a { color: var(--ink-deep); }
+.nav-links a:hover { opacity: 0.55; }
+
+@media (max-width: 768px) {
+  .nav { padding: 20px 24px; }
+  .nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  height: 100vh; min-height: 700px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-image {
+  position: absolute; inset: 0;
+  background: url('./images/01-salon-piano.jpg') center/cover no-repeat;
+  transform: scale(1.05);
+  animation: heroZoom 12s ease-out forwards;
+}
+@keyframes heroZoom { to { transform: scale(1); } }
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.6) 100%);
+}
+
+.hero-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 64px 80px;
+  color: #fff;
+}
+.hero-tag {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 0.6s forwards;
+  margin-bottom: 24px;
+}
+.hero-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 0.9s forwards;
+  margin-bottom: 20px;
+}
+.hero-title-kr {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: 0.3em;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 1.2s forwards;
+  margin-bottom: 40px;
+}
+.hero-subtitle {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(18px, 1.8vw, 24px);
+  max-width: 540px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 1.5s forwards;
+}
+.hero-meta {
+  position: absolute;
+  bottom: 80px; right: 64px;
+  text-align: right;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 1.8s forwards;
+}
+.hero-meta-line {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 6px;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.2em;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 2.1s forwards;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px; height: 40px;
+  background: rgba(255,255,255,0.5);
+  margin: 12px auto 0;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50% { transform: scaleY(0.4); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .hero-content { padding: 0 24px 60px; }
+  .hero-meta { right: 24px; bottom: 60px; }
+}
+
+/* ===== Section base ===== */
+section { padding: 140px 64px; position: relative; }
+@media (max-width: 768px) { section { padding: 80px 24px; } }
+
+.container { max-width: 1280px; margin: 0 auto; }
+.container-narrow { max-width: 880px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent-bronze);
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+  font-weight: 500;
+}
+.section-label::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--accent-bronze);
+}
+
+.section-heading {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--ink-deep);
+}
+.section-heading-kr {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 32px);
+  letter-spacing: 0.08em;
+  color: var(--ink-mauve);
+  margin-bottom: 56px;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Prologue ===== */
+.prologue {
+  background: var(--bg-paper);
+  position: relative;
+}
+.prologue::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 1px; height: 80px;
+  background: var(--accent-bronze);
+  opacity: 0.4;
+}
+.prologue-body {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 2;
+  color: var(--ink-mauve);
+  text-align: center;
+}
+.prologue-body p + p { margin-top: 1.8em; }
+.prologue-body em,
+.location-text em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ink-deep);
+}
+/* Global: strip italic from inline emphasis everywhere */
+em {
+  font-style: normal;
+  font-weight: 700;
+  color: inherit;
+}
+.prologue-signature {
+  margin-top: 64px;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent-bronze);
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+.prologue-signature::before {
+  content: '';
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--accent-bronze);
+  margin: 0 auto 20px;
+}
+
+/* ===== Spaces — Editorial gallery ===== */
+.spaces {
+  background: var(--bg-cream);
+}
+.spaces-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 120px;
+  align-items: end;
+}
+.spaces-intro-text {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 2;
+  color: var(--ink-mauve);
+}
+@media (max-width: 900px) {
+  .spaces-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 80px; }
+}
+
+.space-block {
+  margin-bottom: 160px;
+}
+.space-block:last-child { margin-bottom: 0; }
+
+.space-block .layout-a {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.space-block .layout-b {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: center;
+}
+.space-block .layout-full {
+  display: block;
+}
+
+.space-image-main {
+  position: relative;
+  overflow: hidden;
+}
+.space-image-main img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.space-image-main:hover img {
+  transform: scale(1.03);
+}
+
+.space-text {
+  padding: 0 24px;
+}
+.space-number {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent-bronze);
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+}
+.space-name-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.05;
+  margin-bottom: 8px;
+  color: var(--ink-deep);
+}
+.space-name-kr {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--ink-mauve);
+  letter-spacing: 0.15em;
+  margin-bottom: 28px;
+}
+.space-desc {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--ink-mauve);
+  margin-bottom: 24px;
+}
+.space-meta {
+  font-family: var(--sans-kr);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--ink-muted);
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+}
+.space-meta span { display: inline-block; margin-right: 28px; }
+.space-meta span::before {
+  content: '·';
+  margin-right: 14px;
+  color: var(--accent-bronze);
+}
+.space-meta span:first-child::before { display: none; }
+
+/* Sub-gallery */
+.space-subgallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.space-subgallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+@media (max-width: 900px) {
+  .space-block .layout-a, .space-block .layout-b {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .space-block { margin-bottom: 100px; }
+  .space-text { padding: 0; }
+}
+
+/* Full-width image break */
+.full-image {
+  margin: 100px -64px;
+  position: relative;
+}
+.full-image img {
+  width: 100%;
+  height: 60vh;
+  min-height: 480px;
+  object-fit: cover;
+}
+.full-image-caption {
+  position: absolute;
+  bottom: 32px; left: 64px;
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+@media (max-width: 768px) {
+  .full-image { margin: 60px -24px; }
+  .full-image-caption { left: 24px; }
+}
+
+/* ===== Occasions ===== */
+.occasions {
+  background: var(--ink-deep);
+  color: var(--bg-cream);
+}
+.occasions .section-label { color: var(--accent-bronze-light); }
+.occasions .section-label::before { background: var(--accent-bronze-light); }
+.occasions .section-heading { color: var(--bg-cream); }
+.occasions .section-heading-kr { color: var(--mauve-soft); }
+
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-top: 40px;
+}
+@media (max-width: 768px) {
+  .occasions-grid { grid-template-columns: 1fr; }
+}
+.occasion {
+  background: var(--ink-deep);
+  padding: 56px 40px;
+  transition: background 0.5s;
+}
+.occasion:hover { background: #2A2420; }
+.occasion-num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--accent-bronze-light);
+  letter-spacing: 0.25em;
+  margin-bottom: 20px;
+}
+.occasion-title-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  color: var(--bg-cream);
+}
+.occasion-title-kr {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--mauve-soft);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.occasion-desc {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(244, 239, 232, 0.75);
+}
+
+.occasion-not {
+  margin-top: 64px;
+  padding: 32px 40px;
+  border: 1px solid rgba(184, 148, 105, 0.3);
+  background: rgba(184, 148, 105, 0.04);
+}
+.occasion-not-label {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-bronze-light);
+  margin-bottom: 14px;
+}
+.occasion-not-text {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(244, 239, 232, 0.7);
+  line-height: 1.9;
+}
+
+/* ===== Location ===== */
+.location {
+  background: var(--bg-paper);
+}
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .location-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+.location-text p {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 2;
+  color: var(--ink-mauve);
+}
+.location-text p + p { margin-top: 1.6em; }
+.location-neighbors {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--divider);
+}
+.location-neighbors-label {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-bronze);
+  margin-bottom: 18px;
+}
+.location-neighbors-text {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  color: var(--ink-deep);
+  line-height: 1.7;
+}
+.location-image img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+/* ===== Specs ===== */
+.specs {
+  background: var(--bg-cream);
+}
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  margin-top: 60px;
+}
+@media (max-width: 768px) {
+  .specs-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.specs-block {
+  border-top: 1px solid var(--ink-deep);
+  padding-top: 28px;
+}
+.specs-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 26px;
+  margin-bottom: 6px;
+  color: var(--ink-deep);
+}
+.specs-title-kr {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-mauve);
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+}
+.specs-list { list-style: none; }
+.specs-list li {
+  font-family: var(--sans-kr);
+  font-size: 14px;
+  color: var(--ink-mauve);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--divider);
+  display: flex; justify-content: space-between;
+  gap: 16px;
+  line-height: 1.6;
+}
+.specs-list li span:first-child {
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.specs-list li span:last-child {
+  text-align: right;
+  color: var(--ink-deep);
+  font-weight: 400;
+}
+.specs-list li.empty span:last-child {
+  color: var(--ink-muted);
+  font-style: italic;
+  font-family: var(--serif-kr);
+  opacity: 0.5;
+}
+.specs-note {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-top: 18px;
+  line-height: 1.7;
+}
+
+/* ===== Inquiry ===== */
+.inquiry {
+  background: var(--ink-deep);
+  color: var(--bg-cream);
+  text-align: center;
+  padding: 180px 64px;
+}
+.inquiry .section-label {
+  color: var(--accent-bronze-light);
+  justify-content: center;
+}
+.inquiry .section-label::before { background: var(--accent-bronze-light); }
+.inquiry-heading {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.inquiry-sub {
+  font-family: var(--serif-kr);
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--mauve-soft);
+  margin-bottom: 64px;
+  line-height: 2;
+}
+.inquiry-card {
+  display: inline-block;
+  padding: 56px 80px;
+  border: 1px solid rgba(184, 148, 105, 0.35);
+  background: rgba(184, 148, 105, 0.04);
+  text-align: center;
+}
+.inquiry-by {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-bronze-light);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.inquiry-baek {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 38px;
+  margin-bottom: 4px;
+  color: var(--bg-cream);
+}
+.inquiry-baek-kr {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--mauve-soft);
+  letter-spacing: 0.3em;
+  margin-bottom: 40px;
+}
+.inquiry-person {
+  font-family: var(--serif-kr);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(244, 239, 232, 0.85);
+  margin-bottom: 12px;
+}
+.inquiry-person .role {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bronze-light);
+  margin-right: 12px;
+}
+.inquiry-phone {
+  font-family: var(--serif-en);
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--bg-cream);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 4px;
+  border-bottom: 1px solid rgba(184, 148, 105, 0.4);
+  padding-bottom: 6px;
+  transition: border-color 0.3s;
+}
+.inquiry-phone:hover { border-color: var(--accent-bronze-light); }
+
+@media (max-width: 768px) {
+  .inquiry { padding: 100px 24px; }
+  .inquiry-card { padding: 40px 28px; display: block; }
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--bg-cream);
+  padding: 48px 64px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-mark {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-mauve);
+}
+.footer-text {
+  font-family: var(--sans-kr);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+@media (max-width: 768px) {
+  .footer { padding: 32px 24px; }
+}
+
+/* Decorative ornament */
+.ornament {
+  display: block;
+  width: 60px; height: 1px;
+  background: var(--accent-bronze);
+  margin: 0 auto 32px;
+  position: relative;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--accent-bronze);
+  border-radius: 50%;
+  top: -1.5px;
+}
+.ornament::before { left: -6px; }
+.ornament::after { right: -6px; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-mark">Mezzo Yeonhui<span class="ko">메조연희</span></div>
+  <div class="nav-links">
+    <a href="#prologue">서문</a>
+    <a href="#spaces">공간</a>
+    <a href="#occasions">행사</a>
+    <a href="#location">입지</a>
+    <a href="#inquiry">문의</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-image"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">A Singer's Salon in Yeonhui</div>
+    <h1 class="hero-title">Mezzo Yeonhui</h1>
+    <div class="hero-title-kr">메조연희</div>
+    <p class="hero-subtitle">A house where a voice once lived,<br>now opened to gatherings of music, light, and form.</p>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-line">Seodaemun-gu, Yeonhui-dong</div>
+    <div class="hero-meta-line">Seoul · Est. 1985</div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</header>
+
+<!-- ===== PROLOGUE ===== -->
+<section class="prologue" id="prologue">
+  <div class="container-narrow reveal">
+    <div class="section-label" style="justify-content: center; display: flex;">Prologue · 서문</div>
+    <h2 class="section-heading" style="text-align: center;">A house, retuned.</h2>
+    <div class="section-heading-kr" style="text-align: center;">한 음악인의 집, 다시 조율되다</div>
+    
+    <div class="prologue-body">
+      <p>연희동의 한 골목 끝, 40여 년의 시간을 품은 집이 있습니다.<br>
+      한 음악인, <em>메조 소프라노</em>의 가족이 오랫동안 머물던 이 집은,<br>
+      2026년 봄부터 이야기가 담긴 피아노와 오디오, 오랜 소품들과 함께<br>
+      비로소 <em>음악의 방</em>으로 다시 깨어났습니다.</p>
+      
+      <p>샹들리에 아래의 그랜드 피아노, 모브빛 벽지, 와인딩 계단의 아이언 스크롤.<br>
+      19세기 유럽의 살롱이 그러했듯, 이 집은 사람과 음악과 빛이 모이도록 비워져 있습니다.</p>
+      
+      <p>우리는 이 공간을 <em>메조연희</em>라 부르며,<br>
+      살롱 콘서트, 프라이빗 디너, 큐레이션된 팝업과 촬영을 위한 자리로 소개합니다.</p>
+    </div>
+    
+    <div class="prologue-signature">Curated by Baekjijang</div>
+  </div>
+</section>
+
+<!-- ===== SPACES ===== -->
+<section class="spaces" id="spaces">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">The House · 연희동 길 가장 높은 집</div>
+      <h2 class="section-heading">Six rooms,<br>one continuous mood.</h2>
+      <div class="section-heading-kr">여섯 개의 공간, 하나의 정서</div>
+    </div>
+
+    <div class="spaces-intro reveal">
+      <div></div>
+      <div class="spaces-intro-text">
+        지하의 백스테이지에서 옥상의 도시 풍경까지, 이 집은 하나의 무대처럼 연결되어 있습니다.
+        각 공간은 다른 표정을 가지되, 같은 호흡으로 흐릅니다.
+      </div>
+    </div>
+
+    <!-- 01. SALON -->
+    <div class="space-block reveal">
+      <div class="layout-a">
+        <div class="space-image-main">
+          <img src="./images/01-salon-piano.jpg" alt="The Salon, 그랜드 피아노와 알라바스터 샹들리에">
+        </div>
+        <div class="space-text">
+          <div class="space-number">No. 01</div>
+          <h3 class="space-name-en">The Salon</h3>
+          <div class="space-name-kr">살롱</div>
+          <p class="space-desc">
+            집의 심장. 한 음악인의 그랜드 피아노가 자리한 1층 중앙 공간으로,
+            알라바스터 샹들리에가 부드러운 호박빛을 떨구는 곳입니다.
+            손님 사이의 거리가 너무 가깝지도 멀지도 않게 조율된, 살롱 콘서트를 위한 자리.
+          </p>
+          <div class="space-meta">
+            <span>1F · Main</span>
+            <span>Grand Piano</span>
+            <span>Recital · Reception</span>
+          </div>
+        </div>
+      </div>
+      <div class="space-subgallery">
+        <img src="./images/02-salon-living.jpg" alt="살롱 응접 공간">
+        <img src="./images/06-stairs.jpg" alt="와인딩 계단과 스테인드 글라스">
+      </div>
+    </div>
+
+    <!-- Full image break -->
+    <div class="full-image reveal">
+      <img src="./images/14-window-view.jpg" alt="다이닝 창 너머 안산 풍경">
+      <div class="full-image-caption">a window framing the hills of Ansan</div>
+    </div>
+
+    <!-- 02. DINING -->
+    <div class="space-block reveal">
+      <div class="layout-b">
+        <div class="space-text">
+          <div class="space-number">No. 02</div>
+          <h3 class="space-name-en">The Dining</h3>
+          <div class="space-name-kr">다이닝 룸</div>
+          <p class="space-desc">
+            낮에는 안산 자락이 창에 걸리고, 저녁에는 또 다른 황동빛 샹들리에 아래로
+            긴 호두나무 테이블이 펼쳐집니다. 디너 파티, 와인 페어링, 셰프 테이블,
+            소규모 클로즈드 미팅을 위한 가장 친밀한 자리.
+          </p>
+          <div class="space-meta">
+            <span>1F</span>
+            <span>Walnut Table</span>
+            <span>Private Dinner</span>
+          </div>
+        </div>
+        <div class="space-image-main">
+          <img src="./images/03-dining.jpg" alt="다이닝 룸">
+        </div>
+      </div>
+      <div class="space-subgallery">
+        <img src="./images/04-kitchen-wide.jpg" alt="주방">
+        <img src="./images/05-kitchen-detail.jpg" alt="주방 디테일과 티파니 램프">
+      </div>
+    </div>
+
+    <!-- 03. DRAWING ROOM -->
+    <div class="space-block reveal">
+      <div class="layout-a">
+        <div class="space-image-main">
+          <img src="./images/07-drawing-room.jpg" alt="2층 드로잉 룸">
+        </div>
+        <div class="space-text">
+          <div class="space-number">No. 03</div>
+          <h3 class="space-name-en">The Drawing Room</h3>
+          <div class="space-name-kr">드로잉 룸</div>
+          <p class="space-desc">
+            2층, 천장이 높은 흰 방. 크리스탈 샹들리에 아래로 모브빛 커튼이 드리워지고,
+            창 너머로 테라스가 이어집니다. 살롱의 백스테이지이자
+            VIP 라운지, 분장실, 브레이크아웃 공간으로 운용됩니다.
+          </p>
+          <div class="space-meta">
+            <span>2F</span>
+            <span>High Ceiling</span>
+            <span>Lounge · Green Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="space-subgallery">
+        <img src="./images/08-bathroom.jpg" alt="파우더룸">
+        <img src="./images/15-backstage.jpg" alt="B1 백스테이지">
+      </div>
+    </div>
+
+    <!-- Full image break -->
+    <div class="full-image reveal">
+      <img src="./images/11-terrace-view.jpg" alt="옥상에서 바라본 도시와 산 풍경">
+      <div class="full-image-caption">the city, half-quiet from above</div>
+    </div>
+
+    <!-- 04. ROOFTOP -->
+    <div class="space-block reveal">
+      <div class="layout-b">
+        <div class="space-text">
+          <div class="space-number">No. 04</div>
+          <h3 class="space-name-en">The Rooftop Terrace</h3>
+          <div class="space-name-kr">옥상 테라스</div>
+          <p class="space-desc">
+            긴 우드 데크가 두 면을 둘러싸고, 안산의 능선과 도심의 지붕들이 한눈에 들어옵니다.
+            석양 무렵의 칵테일 리셉션, 여름밤의 가든 파티, 패션 에디토리얼 촬영을 위한 자리.
+          </p>
+          <div class="space-meta">
+            <span>Rooftop</span>
+            <span>Mountain View</span>
+            <span>Cocktail · Photoshoot</span>
+          </div>
+        </div>
+        <div class="space-image-main">
+          <img src="./images/09-rooftop.jpg" alt="옥상 테라스">
+        </div>
+      </div>
+      <div class="space-subgallery">
+        <img src="./images/10-rooftop-wide.jpg" alt="옥상 데크 와이드">
+        <img src="./images/11-terrace-view.jpg" alt="테라스 도시 뷰">
+      </div>
+    </div>
+
+    <!-- 05. GARDEN -->
+    <div class="space-block reveal">
+      <div class="layout-a">
+        <div class="space-image-main">
+          <img src="./images/13-garden-aerial.jpg" alt="정원 위에서 본 풍경">
+        </div>
+        <div class="space-text">
+          <div class="space-number">No. 05</div>
+          <h3 class="space-name-en">The Garden</h3>
+          <div class="space-name-kr">정원과 데크</div>
+          <p class="space-desc">
+            오래된 소나무, 단풍, 그리고 자연스럽게 자란 키 작은 화초들이 이 집을 둘러쌉니다.
+            정원과 우드 데크는 별도의 작은 무대가 됩니다. 가든 다이닝, 야외 시음회,
+            브랜드의 그린 파빌리온으로 변주할 수 있습니다.
+          </p>
+          <div class="space-meta">
+            <span>Garden Level</span>
+            <span>Pine · Maple</span>
+            <span>Garden Party</span>
+          </div>
+        </div>
+      </div>
+      <div class="space-subgallery">
+        <img src="./images/12-garden-deck.jpg" alt="정원 데크 파라솔">
+        <img src="./images/13-garden-aerial.jpg" alt="정원 전경">
+      </div>
+    </div>
+
+    <!-- 06. BACKSTAGE -->
+    <div class="space-block reveal">
+      <div class="layout-b">
+        <div class="space-text">
+          <div class="space-number">No. 06</div>
+          <h3 class="space-name-en">The Backstage</h3>
+          <div class="space-name-kr">백스테이지 (B1)</div>
+          <p class="space-desc">
+            지하의 블루월 룸과 콘크리트 마감의 캐주얼한 공간. 케이터링 준비, 스태프 룸,
+            의상·소품 보관, 거친 텍스처의 콘텐츠 촬영용 세트로 동시에 활용 가능한
+            본 무대 뒤편의 또 다른 공간입니다.
+          </p>
+          <div class="space-meta">
+            <span>B1</span>
+            <span>Raw Concrete</span>
+            <span>Crew · Catering</span>
+          </div>
+        </div>
+        <div class="space-image-main">
+          <img src="./images/15-backstage.jpg" alt="지하 백스테이지">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== OCCASIONS ===== -->
+<section class="occasions" id="occasions">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Occasions · 어울리는 자리</div>
+      <h2 class="section-heading">For gatherings<br>that listen closely.</h2>
+      <div class="section-heading-kr">가까이서 듣는 자리들</div>
+    </div>
+
+    <div class="occasions-grid reveal">
+      <div class="occasion">
+        <div class="occasion-num">I.</div>
+        <h4 class="occasion-title-en">Salon Concerts</h4>
+        <div class="occasion-title-kr">살롱 콘서트</div>
+        <p class="occasion-desc">하우스 콘서트, 챔버 리사이틀, 클래식 크로스오버 무대. 그랜드 피아노가 중심이 되는 30–40인 규모의 친밀한 공연.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">II.</div>
+        <h4 class="occasion-title-en">Private Dinners</h4>
+        <div class="occasion-title-kr">프라이빗 디너</div>
+        <p class="occasion-desc">셰프 테이블, 와인 페어링, 클로즈드 비즈니스 만찬. 다이닝 룸을 중심으로 16인 내외 시팅.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">III.</div>
+        <h4 class="occasion-title-en">Luxury Brand Pop-ups</h4>
+        <div class="occasion-title-kr">럭셔리 브랜드 팝업</div>
+        <p class="occasion-desc">주얼리, 향수, 시계, 와인, 하이엔드 패션의 프레스 데이 및 VIP 프리뷰. 이 집의 정서가 브랜드의 무드보드가 됩니다.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">IV.</div>
+        <h4 class="occasion-title-en">Editorial & Film</h4>
+        <div class="occasion-title-kr">에디토리얼 · 영상 촬영</div>
+        <p class="occasion-desc">패션 화보, 뷰티 캠페인, 드라마와 영화의 살롱 신, 뮤직비디오. 한 채 안에 시간대와 톤이 다른 12개의 공간.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">V.</div>
+        <h4 class="occasion-title-en">Exhibitions & Releases</h4>
+        <div class="occasion-title-kr">전시 · 출판기념회</div>
+        <p class="occasion-desc">소규모 컨템포러리 전시, 출판기념회, 아티스트 토크, 아카이브 디스플레이. 자연광이 좋은 1층과 2층을 활용.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">VI.</div>
+        <h4 class="occasion-title-en">Garden & Rooftop Soirées</h4>
+        <div class="occasion-title-kr">가든 · 옥상 소와레</div>
+        <p class="occasion-desc">석양 무렵의 칵테일 리셉션, 여름밤의 가든 파티, 옥상 디너. 도시의 풍경과 자연이 동시에 무대가 됩니다.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">VII.</div>
+        <h4 class="occasion-title-en">Wellness & Retreats</h4>
+        <div class="occasion-title-kr">웰니스 · 리트릿</div>
+        <p class="occasion-desc">사운드 바스, 명상 리트릿, 프라이빗 클래스, 차회. 도심에서 한 발 비켜선 조용한 한 채를 통째로.</p>
+      </div>
+      <div class="occasion">
+        <div class="occasion-num">VIII.</div>
+        <h4 class="occasion-title-en">Members' Evenings</h4>
+        <div class="occasion-title-kr">멤버스 이브닝</div>
+        <p class="occasion-desc">시리즈로 운영되는 비공개 살롱. 음악, 문학, 미식, 향, 그리고 대화. 백지장이 함께 큐레이션합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATION ===== -->
+<section class="location" id="location">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Location · 입지</div>
+      <h2 class="section-heading">Quietly in Yeonhui.</h2>
+      <div class="section-heading-kr">고요하게, 연희동</div>
+    </div>
+
+    <div class="location-grid reveal">
+      <div class="location-text">
+        <p>
+          서울 서대문구 <em>연희동</em>의 한 골목.
+          연남동의 들뜸과 분리된, 큐레이션된 동네의 안쪽 자락입니다.
+        </p>
+        <p>
+          셀러브리티가 운영하는 웰니스 스튜디오, 컨템포러리 갤러리,
+          큐레이션된 다이닝과 부티크가 조용히 자리한 거리.
+          이 집은 그 거리에서 한 골목 더 안으로 들어선, 어느 음악인의 한 채입니다.
+        </p>
+
+        <div class="location-neighbors">
+          <div class="location-neighbors-label">Within Walking Distance</div>
+          <div class="location-neighbors-text">
+            Celebrity Wellness Studios<br>
+            Contemporary Galleries<br>
+            Curated Dining &amp; Boutiques<br>
+            Ansan Trails &amp; Yeonhui Forest
+          </div>
+        </div>
+
+        <p style="font-family: var(--sans-kr); font-size: 12px; color: var(--ink-muted); letter-spacing: 0.05em; margin-top: 32px; font-style: normal;">
+          정확한 주소와 진입 동선은 예약 확정 후 별도로 안내됩니다.
+        </p>
+      </div>
+      <div class="location-image">
+        <img src="./images/16-exterior-entrance.jpg" alt="진입 외관">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPECS ===== -->
+<section class="specs">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Specifications · 공간 정보</div>
+      <h2 class="section-heading">The fine print,<br>finely kept.</h2>
+      <div class="section-heading-kr">공간의 정보</div>
+    </div>
+
+    <div class="specs-grid reveal">
+      <div class="specs-block">
+        <h3 class="specs-title">Footprint</h3>
+        <div class="specs-title-kr">면적과 구성</div>
+        <ul class="specs-list">
+          <li><span>구조</span><span>지하 1층 / 지상 2층 · 단독주택</span></li>
+          <li><span>연면적</span><span>약 280㎡ (약 85평)</span></li>
+          <li><span>1층</span><span>약 137㎡ · 살롱 · 다이닝 · 주방</span></li>
+          <li><span>2층</span><span>약 90㎡ · 드로잉 룸 · 침실 · 욕실</span></li>
+          <li><span>지하</span><span>약 54㎡ · 백스테이지 · 세탁실</span></li>
+          <li><span>야외</span><span>옥상 테라스 · 정원 데크</span></li>
+          <li><span>준공</span><span>1985년</span></li>
+          <li><span>위치</span><span>서울 서대문구 연희동</span></li>
+        </ul>
+      </div>
+
+      <div class="specs-block">
+        <h3 class="specs-title">Capacity</h3>
+        <div class="specs-title-kr">권장 정원</div>
+        <ul class="specs-list">
+          <li><span>살롱 콘서트 (좌석)</span><span>약 40인</span></li>
+          <li><span>칵테일 리셉션 (스탠딩)</span><span>약 60–80인</span></li>
+          <li><span>프라이빗 디너 (시팅)</span><span>약 16–20인</span></li>
+          <li><span>가든 · 옥상 파티</span><span>약 30인</span></li>
+          <li><span>촬영 (스태프 기준)</span><span>약 15인</span></li>
+        </ul>
+        <p class="specs-note">* 위 정원은 권장 기준이며, 행사 형식과 동선에 따라 협의 조정됩니다.</p>
+      </div>
+
+      <div class="specs-block">
+        <h3 class="specs-title">Included</h3>
+        <div class="specs-title-kr">포함 시설</div>
+        <ul class="specs-list">
+          <li><span>그랜드 피아노</span><span class="empty"></span></li>
+          <li><span>오디오 시스템</span><span class="empty"></span></li>
+          <li><span>식기 · 글라스웨어</span><span class="empty"></span></li>
+          <li><span>주방 · 케이터링 인입</span><span class="empty"></span></li>
+          <li><span>WiFi · 조명 제어</span><span class="empty"></span></li>
+          <li><span>화장실 · 파우더룸</span><span class="empty"></span></li>
+        </ul>
+        <p class="specs-note">* 세부 사항은 건물주와 함께 정비 중이며, 문의 시 최신 상태로 안내됩니다.</p>
+      </div>
+
+      <div class="specs-block">
+        <h3 class="specs-title">Terms</h3>
+        <div class="specs-title-kr">운영 약관</div>
+        <ul class="specs-list">
+          <li><span>운영 시간</span><span>제한 없음 · 협의</span></li>
+          <li><span>대관 단위</span><span>건 단위 · 문의</span></li>
+          <li><span>대관료</span><span>문의 시 안내</span></li>
+          <li><span>케이터링</span><span>반입 가능 · 협의</span></li>
+          <li><span>주차</span><span>별도 안내</span></li>
+        </ul>
+        <p class="specs-note">* 행사의 성격에 따라 권장 사용 범위와 부대 조건이 달라집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INQUIRY ===== -->
+<section class="inquiry" id="inquiry">
+  <div class="reveal">
+    <div class="section-label">Inquiry · 문의</div>
+    <h2 class="inquiry-heading">Shall we begin<br>the conversation?</h2>
+    <p class="inquiry-sub">
+      당신의 자리가 메조연희와 잘 어우러질 수 있을지,<br>
+      함께 이야기 나누고 싶습니다.
+    </p>
+
+    <div class="inquiry-card">
+      <div class="inquiry-by">Curated &amp; Operated by</div>
+      <div class="inquiry-baek">Baekjijang</div>
+      <div class="inquiry-baek-kr">백지장</div>
+
+      <div class="inquiry-person">
+        <span class="role">Director</span>김차근 · Chagun Kim
+      </div>
+      <a href="tel:01074267222" class="inquiry-phone">010 · 7426 · 7222</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-mark">Mezzo Yeonhui · A house of music in Yeonhui-dong.</div>
+  <div class="footer-text">© Baekjijang · 백지장</div>
+</footer>
+
+<script>
+// Nav scroll behavior
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
